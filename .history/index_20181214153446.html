@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>小程序</title>
+</head>
+<link rel="stylesheet" href="./static/css/main.css">
+<body>
+    <div id="app">
+        <canvas id="main" height="600" width="360"></canvas>
+        <div class="components">
+            <button onclick="addImage();">添加图片</button>
+            <button onclick="addText();">添加文字</button>
+        </div>
+    </div>
+    <script src="canvas.min.js"></script>
+    <script>
+        let can = document.getElementById('main');
+        let ctx = can.getContext('2d');
+        const addImage = () => {
+            let img = new Image()
+            img.src = './static/image/test1.jpg'
+            img.maxWidth = can.width;
+            img.onload = () => {
+                ctx.drawImage(img, 0, 0)
+                ctx.save();
+            }
+            console.log('addImage')
+        };
+        const addText = () => {
+            let text = '点击编辑文字'
+            ctx.font = '20px Arial';
+            ctx.textBaseline = 'middle'
+            ctx.textAlign = 'center'
+            let tw = ctx.measureText(text).width;
+            let ftop =3*can.height/4 -5;
+            let fleft = can.width/2;
+            ctx.rect(fleft-tw/2, ftop- 10, tw+20, 30);
+            ctx.fillStyle= "#fff";
+            ctx.strokeStyle='#fff';
+            ctx.strokeText(text, fleft, ftop);
+            console.log('addText')
+        };
+    </script>
+</body>
+</html>
+<!-- var c = document.getElementById("myCanvas");
+c.width=img.width;
+c.height=img.height;
+var cxt = c.getContext("2d");
+cxt.fillStyle = "rgba(255, 255, 255, 0)";
+cxt.fillRect(0, 0, c.width, c.height);
+cxt.drawImage(img,0,0);
+cxt.save();
+cxt.font = fsz+"px Arial";
+cxt.textBaseline = 'middle';//更改字号后，必须重置对齐方式，否则居中麻烦。设置文本的垂直对齐方式
+cxt.textAlign = 'center';
+var tw = cxt.measureText(text).width;
+var ftop = 2 * c.height/3-5;
+var fleft = c.width/2;
+cxt.fillStyle="#ff0000";
+cxt.fillRect(fleft-tw/2,ftop-fsz/2,tw,fsz);//矩形在画布居中方式
+cxt.fillStyle="#ffffff";
+cxt.fillText(text,fleft,ftop);//文本元素在画布居中方式
+cxt.strokeStyle = 'white';
+cxt.strokeText(text,fleft,ftop);//文字边框 -->
