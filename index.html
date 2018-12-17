@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="./static/css/main.css">
 <body>
     <div id="app">
+        <input id="textEditor" type="text">
         <canvas id="main"></canvas>
         <canvas id="edit"></canvas>
         <div class="components">
@@ -24,10 +25,11 @@
     <script>
         let can1 = document.getElementById('main');
         let can2 = document.getElementById('edit');
+        let text_input = document.getElementById('textEditor');
         let canvas = new Canvas(can1)
         let editor = new Editor(can2)
         const addImage = () => {
-            canvas.renderImage('./static/image/test1.jpg', editor);
+            canvas.renderBgImage('./static/image/test1.jpg', editor, text_input);
         };
         const addText = () => {
             editor.createText();
